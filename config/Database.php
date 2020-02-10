@@ -2,25 +2,20 @@
 
 	class Database{
 	  
-	    // specify your own database credentials
-	    private $host = "localhost";
-	    private $db_name = "tes";
+	    private $servername = "localhost";
+	    private $dbname = "tes";
 	    private $username = "root";
 	    private $password = "root";
 	    public $connection;
 	  
-	    // get the database connection
 	    public function getConnection(){
-	  
-	        $this->connection = null;
-	  
-	        try{
-	            $this->connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-	        }catch(PDOException $exception){
-	            echo "Connection error: " . $exception->getMessage();
-	        }
-	  
-	        return $this->connection;
+			$this->connection = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+			
+			if ($this->connection->connect_error) {
+			    die("Connection failed: " . $this->connection->connect_error);
+			}
+
+	        return $this->connection;	  
 	    }
 	}
  ?>

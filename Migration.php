@@ -12,29 +12,30 @@
 	    }
 
 		function create_table(){
-			try {
-				$query = "CREATE TABLE `disburses` (
-					`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					`bank_code` VARCHAR(11) NOT NULL,
-					`account_number` VARCHAR(21) NOT NULL,
-					`amount` INT(11) NOT NULL,
-					`fee` INT(11) NOT NULL,
-					`beneficiary_name` VARCHAR(31) NOT NULL,
-					`remark` VARCHAR(150) NOT NULL,
-					`time_served` VARCHAR(11) NOT NULL,
-					`status` VARCHAR(11) NOT NULL,
-					`receipt` TEXT NULL,
-					`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-				) COLLATE='utf8_general_ci';";
+			$sql = "CREATE TABLE `disburses` (
+				`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`id_disburse` VARCHAR(255) NOT NULL,
+				`bank_code` VARCHAR(11) NOT NULL,
+				`account_number` VARCHAR(21) NOT NULL,
+				`amount` INT(11) NOT NULL,
+				`fee` INT(11) NOT NULL,
+				`beneficiary_name` VARCHAR(31) NOT NULL,
+				`remark` VARCHAR(150) NOT NULL,
+				`time_served` DATETIME NOT NULL,
+				`status` VARCHAR(11) NOT NULL,
+				`receipt` TEXT NULL,
+				`timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+			) COLLATE='utf8_general_ci';";
 
-				$statement = $this->connection->prepare($query);
-				$statement->execute();
-				$callback = "Table MyGuests created successfully";
-			} catch (Exception $e) {
-				$callback = "Error creating table: ". $e->getMessage();
+			if ($this->connection->query($sql) === TRUE) {
+			    $callback = "The table created successfully";
+			} else {
+			    $callback = "Error creating table: " . $this->connection->error;
 			}
-	        
-	        return $callback;
+
+			$this->connection->close();
+
+			return $callback;
 		}
 	}
 
