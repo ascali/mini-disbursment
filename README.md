@@ -20,9 +20,9 @@ To begin using this app, follow the instruction to get started:
 
 # How to Use The Application
 There are three options to run a disbursement request via command in `cmd` or `terminal`
-1. ```cmd php Disbursement.php -pshow ```
-2. ```cmd php Disbursement.php -pcreate ```
-3. ```cmd php Disbursement.php -pcheck -i{id_disburse} ```
+1. ` php Disbursement.php -pshow `
+2. ` php Disbursement.php -pcreate `
+3. ` php Disbursement.php -pcheck -i{id_disburse} `
 
 
 ## How to Create Disbursement
