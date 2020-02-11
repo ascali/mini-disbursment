@@ -31,10 +31,10 @@ There are three options to run a disbursement request via command in `cmd` or `t
 3. Type ` php Disbursement.php -pcreate`
 	* default value are
 	```php 
-			$bank_code = 'bni';
-	    	$account_number = '1234567890';
-	    	$amount = 111111;
-	    	$remark = 'Sample remark by me';
+		$bank_code = 'bni';
+    	$account_number = '1234567890';
+    	$amount = 111111;
+    	$remark = 'Sample remark by me';
 	``` 
 	- if you want change the values 
 		1. in `mini-disbursement` open `Disbursement.php`
