@@ -1,10 +1,8 @@
 <?php
-	// include database and object files
 	include_once 'config/Database.php';
 
 	class Migration
 	{
-	    // database connection and table name
 	    private $connection;
 	    
 	    public function __construct($db){
@@ -39,7 +37,6 @@
 		}
 	}
 
-	// get database connection
 	$database = new Database();
 	$db = $database->getConnection();
 

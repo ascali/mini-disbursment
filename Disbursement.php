@@ -4,7 +4,6 @@
 
 	class Disbursement
 	{
-	    // database connection and table name
 	    private $url_flip;
 	    private $username;
 	    private $password;
@@ -12,7 +11,6 @@
 	    private $connection;
 	    private $table_name;
 
-	    // object properties
 		public $id_disburse;
 		public $amount;
 		public $status;
@@ -60,8 +58,10 @@
 
 			$res = json_decode($response, true);
 			
-			$sql = "INSERT INTO `$this->table_name` (`id_disburse`, `bank_code`, `account_number`, `amount`, `fee`, `beneficiary_name`, `remark`, `time_served`, `status`, `receipt`, `timestamp`)
-			VALUES ('".$res['id']."', '".$res['bank_code']."', '".$res['account_number']."', '".$res['amount']."', '".$res['fee']."', '".$res['beneficiary_name']."', '".$res['remark']."', '".$res['time_served']."', '".$res['status']."', '".$res['receipt']."', '".$res['timestamp']."')";
+			$sql = "INSERT INTO `$this->table_name` 
+					(`id_disburse`, `bank_code`, `account_number`, `amount`, `fee`, `beneficiary_name`, `remark`, `time_served`, `status`, `receipt`, `timestamp`)
+					VALUES 
+					('".$res['id']."', '".$res['bank_code']."', '".$res['account_number']."', '".$res['amount']."', '".$res['fee']."', '".$res['beneficiary_name']."', '".$res['remark']."', '".$res['time_served']."', '".$res['status']."', '".$res['receipt']."', '".$res['timestamp']."')";
 
 			if ($this->connection->query($sql) === TRUE) {
 			    $callback = $response;
@@ -119,7 +119,7 @@
 					array_push($callback, $row);
 				}
 			} else {
-			    $callback = "0 results";
+			    $callback = array("message" => "0 results");
 			}
 
 			header('Content-Type: application/json');
@@ -132,17 +132,17 @@
 
 	$disburse = new Disbursement($db);
 	
-	$paramId = getopt("p:");
-	foreach ($paramId as $value) {
-		$param = $value;
-	}
+	$param = getopt("p:");
+	$paramId = getopt("i:");
 	
-	if ($param!="show") {
-		echo $disburse->update_disburse($param);
-	} else if ($param=="show") {
+	if ($param['p']=="show") {
 		echo $disburse->show_disburse();
-	} else {
+	} else if ($param['p']=="create") {
 		echo $disburse->create_disburse();
+	} else if ($param['p']=="check") {
+		echo $disburse->update_disburse($paramId['i']);
+	} else {
+		echo 'choose options to run disbursment';
 	}
 
  ?>

@@ -6,6 +6,7 @@
 	    private $dbname = "tes";
 	    private $username = "root";
 	    private $password = "root";
+	    
 	    public $connection;
 	  
 	    public function getConnection(){
